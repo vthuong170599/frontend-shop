@@ -13,6 +13,12 @@ This source use version Nuxt 2.11.0 and  CoreUI Free Vue Bootstrap Admin Templat
 ## Build Setup
 
 ``` bash
+# clone the repo
+$ git clone https://gitlab.com/kim-digi-dinos/nuxt-and-coreui-free-vue-bootstrap-admin-template.git     Nuxt-CoreUI-Vue
+
+# go into app's directory
+$ cd Nuxt-CoreUI-Vue
+
 # install dependencies
 $ yarn install
 
