@@ -7,29 +7,29 @@
             <CCardBody>
               <CForm>
                 <h1>Login</h1>
-                <p class="text-muted">
-                  Sign In to your account
-                </p>
+                <p class="text-muted">Sign In to your account</p>
                 <CInput
                   placeholder="Username"
                   autocomplete="username email"
+                  v-model="formUser.email"
                 >
                   <template #prepend-content>
-                    <CIcon name="cil-user" />
+                    <CIcon :content="$options.freeSet.cilUser" />
                   </template>
                 </CInput>
                 <CInput
                   placeholder="Password"
                   type="password"
                   autocomplete="curent-password"
+                  v-model="formUser.password"
                 >
                   <template #prepend-content>
-                    <CIcon name="cil-lock-locked" />
+                    <CIcon :content="$options.freeSet.cilLockLocked" />
                   </template>
                 </CInput>
                 <CRow>
                   <CCol col="6">
-                    <CButton color="primary" class="px-4">
+                    <CButton color="primary" class="px-4" @click="login">
                       Login
                     </CButton>
                   </CCol>
@@ -46,15 +46,15 @@
             color="primary"
             text-color="white"
             class="text-center py-5 d-md-down-none"
-            style="width:44%"
+            style="width: 44%"
             body-wrapper
           >
             <h2>Sign up</h2>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-            <CButton
-              color="primary"
-              class="active mt-3"
-            >
+            <p>
+              Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
+              eiusmod tempor incididunt ut labore et dolore magna aliqua.
+            </p>
+            <CButton color="primary" class="active mt-3">
               Register Now!
             </CButton>
           </CCard>
@@ -65,7 +65,30 @@
 </template>
 
 <script>
+import { freeSet } from "@coreui/icons";
 export default {
-  name: 'Login'
-}
+  name: "Login",
+  freeSet,
+  data() {
+    return {
+      formUser: {
+        email: "",
+        password: "",
+      },
+    };
+  },
+  methods: {
+    async login() {
+      try {
+        await this.$auth.loginWith("local", { data: this.formUser });
+        this.$router.push("/");
+      } catch (err) {
+        this.$notify.error({
+          title: "Error",
+          message: "Sai email hoặc mật khẩu",
+        });
+      }
+    },
+  },
+};
 </script>

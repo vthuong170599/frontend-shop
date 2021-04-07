@@ -1,13 +1,15 @@
 <template>
-  <Dashboard />
+  <h1>welcome to my page</h1>
 </template>
 
 <script>
-import Dashboard from './Dashboard'
 
 export default {
-  components: {
-    Dashboard
-  }
 }
 </script>
+<style scoped>
+h1{
+  text-align: center;
+  margin-top: 20%;
+}
+</style>

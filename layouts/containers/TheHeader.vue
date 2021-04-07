@@ -18,51 +18,34 @@
       alt="CoreUI Logo"
     />
     <CHeaderNav class="d-md-down-none mr-auto">
-      <CHeaderNavItem class="px-3">
-        <CHeaderNavLink to="/dashboard">
-          Dashboard
-        </CHeaderNavLink>
-      </CHeaderNavItem>
-      <CHeaderNavItem class="px-3">
-        <CHeaderNavLink to="/users" exact>
-          Users
-        </CHeaderNavLink>
-      </CHeaderNavItem>
-      <CHeaderNavItem class="px-3">
-        <CHeaderNavLink>
-          Settings
-        </CHeaderNavLink>
-      </CHeaderNavItem>
     </CHeaderNav>
     <CHeaderNav class="mr-4">
       <CHeaderNavItem class="d-md-down-none mx-2">
         <CHeaderNavLink>
-          <CIcon name="cil-bell" />
+          <CIcon :content="$options.freeSet.cilBell" />
         </CHeaderNavLink>
       </CHeaderNavItem>
       <CHeaderNavItem class="d-md-down-none mx-2">
         <CHeaderNavLink>
-          <CIcon name="cil-list" />
+          <CIcon :content="$options.freeSet.cilList" />
         </CHeaderNavLink>
       </CHeaderNavItem>
       <CHeaderNavItem class="d-md-down-none mx-2">
         <CHeaderNavLink>
-          <CIcon name="cil-envelope-open" />
+          <CIcon :content="$options.freeSet.cilEnvelopeOpen" />
         </CHeaderNavLink>
       </CHeaderNavItem>
       <TheHeaderDropdownAccnt />
     </CHeaderNav>
-    <CSubheader class="px-3">
-      <CBreadcrumbRouter class="border-0" />
-    </CSubheader>
   </CHeader>
 </template>
 
 <script>
 import TheHeaderDropdownAccnt from './TheHeaderDropdownAccnt'
-
+import { freeSet } from "@coreui/icons";
 export default {
   name: 'TheHeader',
+  freeSet,
   components: {
     TheHeaderDropdownAccnt
   }

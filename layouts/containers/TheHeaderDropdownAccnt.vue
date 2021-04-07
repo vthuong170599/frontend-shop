@@ -8,10 +8,7 @@
     <template #toggler>
       <CHeaderNavLink>
         <div class="c-avatar">
-          <img
-            src="img/avatars/6.jpg"
-            class="c-avatar-img "
-          >
+           <CIcon :content="$options.freeSet.cilUser" />
         </div>
       </CHeaderNavLink>
     </template>
@@ -78,8 +75,10 @@
 </template>
 
 <script>
+import { freeSet } from "@coreui/icons";
 export default {
   name: 'TheHeaderDropdownAccnt',
+  freeSet,
   data () {
     return {
       itemsCount: 42

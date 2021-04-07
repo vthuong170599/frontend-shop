@@ -1,8 +1,8 @@
 <template>
   <div class="c-app">
-    <TheSidebar />
+    <TheSidebar v-if="$nuxt.$auth.loggedIn"/>
     <div class="c-wrapper">
-      <TheHeader />
+      <TheHeader v-if="$nuxt.$auth.loggedIn"/>
       <div class="c-body">
         <main class="c-main">
           <CContainer fluid>
@@ -12,7 +12,7 @@
           </CContainer>
         </main>
       </div>
-      <TheFooter />
+      <TheFooter v-if="$nuxt.$auth.loggedIn"/>
     </div>
   </div>
 </template>
