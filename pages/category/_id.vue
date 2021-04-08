@@ -1,5 +1,5 @@
 <template>
-  <create-edit-category @sendDataById="getDataCategory" />
+  <create-edit-category @updateCategory="updateCategory" />
 </template>
 <script>
 import CreateEditCategory from "~/components/Category/CreateEditCategory.vue";
@@ -9,7 +9,11 @@ export default {
     CreateEditCategory,
   },
   methods: {
-    getDataCategory(data) {
+    /**
+     * update category
+     * @param Object data
+     */
+    updateCategory(data) {
       axios
         .put("http://127.0.0.1:8000/api/category/" + data.id, data.data, {
           headers: {

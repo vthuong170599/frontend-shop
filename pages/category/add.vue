@@ -1,6 +1,6 @@
 <template>
   <div>
-    <create-edit-category @sendDataCategory="getDataCategory" />
+    <create-edit-category @createCategory="createCategory" />
   </div>
 </template>
 <script>
@@ -9,7 +9,11 @@ import axios from "axios";
 export default {
   components: { CreateEditCategory },
   methods: {
-    getDataCategory(data) {
+    /**
+     * create category
+     * @param Object data
+     */
+    createCategory(data) {
       axios
         .post(
           "http://127.0.0.1:8000/api/category",

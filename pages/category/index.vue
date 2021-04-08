@@ -32,6 +32,10 @@ export default {
     };
   },
   methods: {
+    /**
+     * Call API List category
+     * @param Integer page
+     */
     fetch(e, page) {
       axios
         .get("http://127.0.0.1:8000/api/category?page=" + page, {

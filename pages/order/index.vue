@@ -32,6 +32,10 @@ export default {
     };
   },
   methods: {
+    /**
+     * call API list Order
+     * @param Integer page
+     */
     fetch(e, page) {
       axios
         .get("http://127.0.0.1:8000/api/order?page=" + page, {

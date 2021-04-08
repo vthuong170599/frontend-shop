@@ -28,7 +28,7 @@
       <CButton
         v-if="!this.$route.params.id"
         color="primary"
-        @click="sendDataCategory()"
+        @click="createCategory()"
       >
         Submit
       </CButton>
@@ -36,7 +36,7 @@
         v-else
         color="primary"
         class="btn-click"
-        @click="sendDataById(formCategory.id)"
+        @click="updateCategory(formCategory.id)"
       >
         Update
       </CButton>
@@ -55,12 +55,27 @@ export default {
     };
   },
   methods: {
-    sendDataCategory() {
+    /**
+     * create category
+     * send data to page add
+     */
+    createCategory() {
       this.$emit("sendDataCategory", this.formCategory);
     },
-    sendDataById(id){
+
+    /**
+     * update category
+     * send data to page _id
+     * @param Integer id
+     */
+    updateCategory(id){
         this.$emit('sendDataById', {id:id,data:this.formCategory});
     },
+
+    /**
+     * get category by id
+     * @param Integer id
+     */
     getDataCategory(id) {
       axios
         .get("http://127.0.0.1:8000/api/category/" + id, {

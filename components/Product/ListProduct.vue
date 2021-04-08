@@ -60,6 +60,10 @@ export default {
     },
   },
   methods: {
+    /**
+     * delete product
+     * @param Integer id
+     */
     deleteProduct(id) {
       swal
         .fire({

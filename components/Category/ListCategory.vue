@@ -49,6 +49,10 @@ export default {
     },
   },
   methods: {
+    /**
+     * delete category
+     * @param Integer id
+     */
     deleteCategory(id) {
     swal
         .fire({

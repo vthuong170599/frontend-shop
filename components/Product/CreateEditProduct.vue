@@ -104,10 +104,17 @@ export default {
     };
   },
   methods: {
+    /**
+     * create product
+     * send data to page add
+     */
     createProduct() {
       this.$emit("createProduct", this.formProduct);
     },
 
+    /**
+     * get category 
+     */
     getCategory() {
       axios
         .get("http://127.0.0.1:8000/api/category", {
@@ -120,6 +127,10 @@ export default {
         });
     },
 
+    /**
+     * get product by id
+     * @param Integer id
+     */
     getDataProduct(id) {
       axios
         .get("http://127.0.0.1:8000/api/product/" + id, {
@@ -132,6 +143,11 @@ export default {
         });
     },
 
+    /**
+     * update product
+     * send data to page _id
+     * @param Integer id
+     */
     updateProduct(id) {
       this.$emit("updateProduct", { id: id, data: this.formProduct });
     },

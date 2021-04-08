@@ -78,6 +78,9 @@ export default {
     };
   },
   methods: {
+    /**
+     * login 
+     */
     async login() {
       try {
         await this.$auth.loginWith("local", { data: this.formUser });

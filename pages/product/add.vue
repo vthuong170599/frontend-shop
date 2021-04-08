@@ -9,6 +9,10 @@ export default {
     CreateEditProduct,
   },
   methods: {
+    /**
+     * create product
+     * @param Object listProduct
+     */
     createProduct(listProduct) {
       // console.warn(' listProduct.thumb.target.files[0]',  listProduct.thumb.target.files[0]);
       const data = new FormData();
