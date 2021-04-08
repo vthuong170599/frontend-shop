@@ -14,6 +14,18 @@ export default [
         to: '/category',
         icon: 'cil-speedometer',
       },
+      {
+        _name: 'CSidebarNavItem',
+        name: 'Product',
+        to: '/product',
+        icon: 'cil-speedometer',
+      },
+      {
+        _name: 'CSidebarNavItem',
+        name: 'Order',
+        to: '/order',
+        icon: 'cil-speedometer',
+      },
     ]
   }
 ]
