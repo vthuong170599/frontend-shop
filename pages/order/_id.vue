@@ -4,11 +4,12 @@
 <script>
 import EditOrder from "~/components/Order/EditOrder.vue";
 import axios from "axios";
+import {URL} from '../../constant/constant';
 export default {
   components: { EditOrder },
   methods: {
     updateOrder(listOrder) {
-      axios.put("http://127.0.0.1:8000/api/order/" + listOrder.id, listOrder, {
+      axios.put(URL+"order/" + listOrder.id, listOrder, {
         headers: {
           Authorization: `${$nuxt.$auth.getToken("local")}`,
         },

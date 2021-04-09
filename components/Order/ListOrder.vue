@@ -73,6 +73,7 @@ import { freeSet } from "@coreui/icons";
 import { STATUS } from "../../constant/constant";
 import listOrderDetail from "../OrderDetail/listOrderDetail.vue";
 import axios from "axios";
+import {URL} from '../../constant/constant';
 const FIELDS_ORDER_DETAIL = [
   { key: "product", methods: "Product" },
   { key: "price", methods: "Price" },
@@ -119,7 +120,7 @@ export default {
       this.$nextTick(() => {
         this.collapseDuration = 0;
         axios
-          .get("http://127.0.0.1:8000/api/show_by_order/"+item.id, {
+          .get(URL+"show_by_order/"+item.id, {
             headers: {
               Authorization: `${$nuxt.$auth.getToken("local")}`,
             },

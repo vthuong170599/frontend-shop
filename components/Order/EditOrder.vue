@@ -48,6 +48,7 @@
 <script>
 import { STATUS } from "../../constant/constant";
 import axios from "axios";
+import {URL} from '../../constant/constant';
 export default {
   data() {
     return {
@@ -64,7 +65,7 @@ export default {
   methods: {
     getOrder(id) {
       axios
-        .get("http://127.0.0.1:8000/api/order/" + id, {
+        .get(URL+"order/" + id, {
           headers: {
             Authorization: `${$nuxt.$auth.getToken("local")}`,
           },

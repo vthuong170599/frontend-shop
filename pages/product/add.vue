@@ -4,6 +4,7 @@
 <script>
 import CreateEditProduct from "~/components/Product/CreateEditProduct.vue";
 import axios from "axios";
+import {URL} from '../../constant/constant';
 export default {
   components: {
     CreateEditProduct,
@@ -25,7 +26,7 @@ export default {
       data.append("thumb", listProduct.thumb);
       console.log(data.get('thumb'))
       const res = await axios
-        .post("http://127.0.0.1:8000/api/product", data, {
+        .post(URL+"product", data, {
           headers: {
             Authorization: `${$nuxt.$auth.getToken("local")}`,
             "Content-type": "multipart/form-data",

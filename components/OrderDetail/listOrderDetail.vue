@@ -17,6 +17,7 @@
 </template>
 <script>
 import axios from "axios";
+import {URL} from '../../constant/constant';
 const FIELDS = [
   { key: "product", methods: "Product" },
   { key: "price", methods: "Price" },
@@ -34,7 +35,7 @@ export default {
   methods: {
     getOrderDetail(id) {
       axios
-        .get("http://127.0.0.1:8000/api/order_detail", {
+        .get(URL+"order_detail", {
           headers: {
             Authorization: `${$nuxt.$auth.getToken("local")}`,
           },

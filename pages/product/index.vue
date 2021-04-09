@@ -19,6 +19,7 @@
 <script>
 import ListProduct from "~/components/Product/ListProduct.vue";
 import axios from "axios";
+import {URL} from '../../constant/constant';
 const FIELDS = [
   { key: "id", label: "id" },
   { key: "name", label: "Name" },
@@ -47,7 +48,7 @@ export default {
      */
     fetch(e, page) {
       axios
-        .get("http://127.0.0.1:8000/api/product?page=" + page, {
+        .get(URL+"product?page=" + page, {
           headers: {
             Authorization: `${$nuxt.$auth.getToken("local")}`,
           },

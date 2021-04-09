@@ -45,6 +45,7 @@
 </template>
 <script>
 import axios from "axios";
+import {URL} from '../../constant/constant';
 export default {
   data() {
     return {
@@ -78,7 +79,7 @@ export default {
      */
     getDataCategory(id) {
       axios
-        .get("http://127.0.0.1:8000/api/category/" + id, {
+        .get(URL+"category/" + id, {
           headers: {
             Authorization: `${$nuxt.$auth.getToken("local")}`,
           },

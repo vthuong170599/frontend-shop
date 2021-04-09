@@ -15,6 +15,7 @@
 <script>
 import axios from "axios";
 import ListOrder from "~/components/Order/ListOrder.vue";
+import {URL} from '../../constant/constant';
 const FIELDS = [
   { key: "id", label: "id" },
   { key: "name", label: "Name" },
@@ -50,7 +51,7 @@ export default {
      */
     fetch(e, page) {
       axios
-        .get("http://127.0.0.1:8000/api/order?page=" + page, {
+        .get(URL+"order?page=" + page, {
           headers: {
             Authorization: `${$nuxt.$auth.getToken("local")}`,
           },

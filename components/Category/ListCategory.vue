@@ -36,6 +36,7 @@
 import { freeSet } from "@coreui/icons";
 import axios from "axios";
 import swal from "sweetalert2";
+import {URL} from '../../constant/constant';
 export default {
   freeSet,
   props: {
@@ -68,7 +69,7 @@ export default {
             console.log(result);
           if (result.value) {
             axios
-              .delete("http://127.0.0.1:8000/api/category/" + id, {
+              .delete(URL+"category/" + id, {
                 headers: {
                   Authorization: `${$nuxt.$auth.getToken("local")}`,
                 },

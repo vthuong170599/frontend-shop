@@ -6,6 +6,7 @@
 <script>
 import CreateEditCategory from "~/components/Category/CreateEditCategory.vue";
 import axios from "axios";
+import {URL} from '../../constant/constant';
 export default {
   components: { CreateEditCategory },
   methods: {
@@ -16,7 +17,7 @@ export default {
     createCategory(data) {
       axios
         .post(
-          "http://127.0.0.1:8000/api/category",
+          URL+"category",
           data,
           {
             headers: {

@@ -15,6 +15,7 @@
 <script>
 import axios from "axios";
 import ListCategory from "~/components/Category/ListCategory.vue";
+import {URL} from '../../constant/constant';
 const FIELDS = [
   { key: "id", label: "id" },
   { key: "name", label: "name" },
@@ -38,7 +39,7 @@ export default {
      */
     fetch(e, page) {
       axios
-        .get("http://127.0.0.1:8000/api/category?page=" + page, {
+        .get(URL+"category?page=" + page, {
           headers: {
             Authorization: `${$nuxt.$auth.getToken("local")}`,
           },

@@ -4,6 +4,7 @@
 <script>
 import CreateEditCategory from "~/components/Category/CreateEditCategory.vue";
 import axios from "axios";
+import {URL} from '../../constant/constant';
 export default {
   components: {
     CreateEditCategory,
@@ -15,7 +16,7 @@ export default {
      */
     updateCategory(data) {
       axios
-        .put("http://127.0.0.1:8000/api/category/" + data.id, data.data, {
+        .put(URL+"category/" + data.id, data.data, {
           headers: {
             Authorization: `${$nuxt.$auth.getToken("local")}`,
           },

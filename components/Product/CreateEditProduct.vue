@@ -87,6 +87,7 @@
 </template>
 <script>
 import axios from "axios";
+import {URL} from '../../constant/constant';
 export default {
   data() {
     return {
@@ -121,7 +122,7 @@ export default {
      */
     getCategory() {
       axios
-        .get("http://127.0.0.1:8000/api/category", {
+        .get(URL+"category", {
           headers: {
             Authorization: `${$nuxt.$auth.getToken("local")}`,
           },
@@ -137,7 +138,7 @@ export default {
      */
     getDataProduct(id) {
       axios
-        .get("http://127.0.0.1:8000/api/product/" + id, {
+        .get(URL+"product/" + id, {
           headers: {
             Authorization: `${$nuxt.$auth.getToken("local")}`,
           },
