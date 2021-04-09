@@ -20,7 +20,7 @@
           <div>
             <td class="img">
               <img
-                :src="require(`@/assets/img/logo.png`)"
+                :src="'http://localhost:8000/' + item.thumb"
                 alt=""
                 class="img-fluid w-75"
               />

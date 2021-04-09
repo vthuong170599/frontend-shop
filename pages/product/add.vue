@@ -13,7 +13,7 @@ export default {
      * create product
      * @param Object listProduct
      */
-    createProduct(listProduct) {
+    async createProduct(listProduct) {
       // console.warn(' listProduct.thumb.target.files[0]',  listProduct.thumb.target.files[0]);
       const data = new FormData();
       data.append("cate_id", listProduct.cate_id);
@@ -22,17 +22,18 @@ export default {
       data.append("price", listProduct.price);
       data.append("discount", listProduct.discount);
       data.append("qty", listProduct.qty);
-      data.append("thumb", listProduct.thumb.target.files[0]);
-      axios
+      data.append("thumb", listProduct.thumb);
+      console.log(data.get('thumb'))
+      const res = await axios
         .post("http://127.0.0.1:8000/api/product", data, {
           headers: {
             Authorization: `${$nuxt.$auth.getToken("local")}`,
             "Content-type": "multipart/form-data",
           },
         })
-        .then((res) => {
-         router.push('/product');
-        });
+      if(res) {
+          this.$router.push('/product')
+      }
     },
   },
 };

@@ -1,0 +1,1 @@
+export const STATUS = [ "xác nhận","đang giao hàng","đã giao hàng","hủy đơn hàng"];

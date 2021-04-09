@@ -52,7 +52,7 @@
           </div>
         </CCol>
         <CCol sm="6">
-          <CInputFile v-model="formProduct.thumb" label="thumb" />
+          <CInputFile type="flie" @change="getFile" abel="thumb" />
         </CCol>
       </CRow>
       <CRow>
@@ -110,6 +110,10 @@ export default {
      */
     createProduct() {
       this.$emit("createProduct", this.formProduct);
+    },
+
+    getFile(files) {
+      this.formProduct.thumb = files
     },
 
     /**

@@ -14,6 +14,7 @@ export default {
      * @param Object ListProduct
      */
     updateProduct(dataProduct) {
+      console.log(dataProduct.data);
       // console.warn(' listProduct.thumb.target.files[0]',  dataProduct.data.thumb.target);
       let data = new FormData();
       data.append("cate_id", dataProduct.data.cate_id);
@@ -22,10 +23,10 @@ export default {
       data.append("price", dataProduct.data.price);
       data.append("discount", dataProduct.data.discount);
       data.append("qty", dataProduct.data.qty);
-      data.append("thumb", dataProduct.data.thumb.target.files[0]);
-      console.log(data.get('thumb'));
+      data.append("thumb", dataProduct.data.thumb);
+      console.log(data.get('name'));
       axios
-        .put("http://127.0.0.1:8000/api/product/" + dataProduct.id, data, {
+        .post("http://127.0.0.1:8000/api/product/" + dataProduct.id, data, {
           headers: {
             Authorization: `${$nuxt.$auth.getToken("local")}`,
             "Content-type": "multipart/form-data",
