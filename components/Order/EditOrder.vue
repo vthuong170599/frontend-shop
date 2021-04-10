@@ -26,7 +26,7 @@
             <select
               class="form-control"
               v-model="formOrder.status"
-              :disabled="setChecked()"
+              :disabled="setSelected()"
             >
               <option
                 v-for="(stt, index) in status"
@@ -63,6 +63,10 @@ export default {
     };
   },
   methods: {
+      /**
+       * get order by id
+       * @param {Integer} id
+       */
     getOrder(id) {
       axios
         .get(URL+"order/" + id, {
@@ -75,11 +79,18 @@ export default {
         });
     },
 
+    /**
+     * Update order
+     * @param {Integer} id
+     */
     updateOrder(id) {
       this.$emit("updateOrder", this.formOrder);
     },
 
-    setChecked() {
+    /**
+     * set order selected
+     */
+    setSelected() {
       if (this.formOrder.status === 2 || this.formOrder.status === 3) {
         return true;
       } else {
