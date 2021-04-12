@@ -11,6 +11,9 @@
             placeholder="Enter your name"
             v-model="formProduct.name"
           />
+          <p v-if="Object.keys(error).length > 0" class="text text-danger">
+            {{ error.name }}
+          </p>
         </CCol>
         <CCol sm="6">
           <CInput
@@ -18,6 +21,9 @@
             placeholder="Enter your price"
             v-model="formProduct.price"
           />
+          <p v-if="Object.keys(error).length > 0" class="text text-danger">
+            {{ error.price }}
+          </p>
         </CCol>
       </CRow>
       <CRow>
@@ -27,6 +33,9 @@
             placeholder="Enter your discount"
             v-model="formProduct.discount"
           />
+          <p v-if="Object.keys(error).length > 0" class="text text-danger">
+            {{ error.disount }}
+          </p>
         </CCol>
         <CCol sm="6">
           <CInput
@@ -34,12 +43,15 @@
             placeholder="Enter your quantity"
             v-model="formProduct.qty"
           />
+          <p v-if="Object.keys(error).length > 0" class="text text-danger">
+            {{ error.qty }}
+          </p>
         </CCol>
       </CRow>
       <CRow>
         <CCol sm="6">
           <div class="form-group">
-            <label for=""></label>
+            <label for="">category</label>
             <select class="custom-select" v-model="formProduct.cate_id">
               <option
                 v-for="(category, index) in listCategory"
@@ -50,9 +62,20 @@
               </option>
             </select>
           </div>
+          <p v-if="Object.keys(error).length > 0" class="text text-danger">
+            {{ error.cate_id }}
+          </p>
         </CCol>
         <CCol sm="6">
-          <CInputFile type="flie" @change="getFile" abel="thumb" />
+          <CInputFile
+            label="thumb"
+            type="flie"
+            @change="getFile"
+            abel="thumb"
+          />
+          <p v-if="Object.keys(error).length > 0" class="text text-danger">
+            {{ error.thumb }}
+          </p>
         </CCol>
       </CRow>
       <CRow>
@@ -61,8 +84,11 @@
             label="Description"
             placeholder="Enter your description"
             v-model="formProduct.desc"
-          >{{formProduct.desc}}
+            >{{ formProduct.desc }}
           </CTextarea>
+          <p v-if="Object.keys(error).length > 0" class="text text-danger">
+            {{ error.desc }}
+          </p>
         </CCol>
       </CRow>
     </CCardBody>
@@ -87,7 +113,7 @@
 </template>
 <script>
 import axios from "axios";
-import {URL} from '../../constant/constant';
+import { URL } from "../../constant/constant";
 export default {
   data() {
     return {
@@ -102,6 +128,7 @@ export default {
         qty: "",
       },
       listCategory: [],
+      error: {},
     };
   },
   methods: {
@@ -110,19 +137,23 @@ export default {
      * send data to page add
      */
     createProduct() {
+      this.validate();
+      if (Object.keys(this.error).length > 0) {
+        return this.error;
+      }
       this.$emit("createProduct", this.formProduct);
     },
 
     getFile(files) {
-      this.formProduct.thumb = files
+      this.formProduct.thumb = files;
     },
 
     /**
-     * get category 
+     * get category
      */
     getCategory() {
       axios
-        .get(URL+"category", {
+        .get(URL + "category", {
           headers: {
             Authorization: `${$nuxt.$auth.getToken("local")}`,
           },
@@ -138,7 +169,7 @@ export default {
      */
     getDataProduct(id) {
       axios
-        .get(URL+"product/" + id, {
+        .get(URL + "product/" + id, {
           headers: {
             Authorization: `${$nuxt.$auth.getToken("local")}`,
           },
@@ -154,7 +185,30 @@ export default {
      * @param Integer id
      */
     updateProduct(id) {
+      this.validate();
+      if (Object.keys(this.error).length > 0) {
+        return this.error;
+      }
       this.$emit("updateProduct", { id: id, data: this.formProduct });
+    },
+
+    validate() {
+      this.error = {};
+      if (this.formProduct.name == "") {
+        this.error.name = "name khong duoc de trong";
+      } else if (this.formProduct.price == "") {
+        this.error.price = "price khong duoc de trong";
+      } else if (this.formProduct.discount == "") {
+        this.error.discount = "discount khong duoc de trong";
+      } else if (this.formProduct.qty == "") {
+        this.error.qty = "quantity khong duoc de trong";
+      } else if (this.formProduct.cate_id == "") {
+        this.error.cate_id = "category khong duoc de trong";
+      } else if (this.formProduct.thumb == "") {
+        this.error.thumb = "thumb khong duoc de trong";
+      } else if (this.formProduct.desc == "") {
+        this.error.desc = "desc khong duoc de trong";
+      }
     },
   },
   mounted() {

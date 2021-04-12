@@ -1,5 +1,6 @@
 <template>
   <div>
+    <search @sendKeyword="getKeyword" />
     <list-product
       :listProduct="listProduct"
       :fields="fields"
@@ -19,7 +20,8 @@
 <script>
 import ListProduct from "~/components/Product/ListProduct.vue";
 import axios from "axios";
-import {URL} from '../../constant/constant';
+import { URL } from "../../constant/constant";
+import search from "~/components/common/search";
 const FIELDS = [
   { key: "id", label: "id" },
   { key: "name", label: "Name" },
@@ -32,7 +34,7 @@ const FIELDS = [
   { key: "method", label: "method" },
 ];
 export default {
-  components: { ListProduct },
+  components: { ListProduct, search },
   data() {
     return {
       listProduct: [],
@@ -48,7 +50,7 @@ export default {
      */
     fetch(e, page) {
       axios
-        .get(URL+"product?page=" + page, {
+        .get(URL + "product?page=" + page, {
           headers: {
             Authorization: `${$nuxt.$auth.getToken("local")}`,
           },
@@ -58,9 +60,22 @@ export default {
           this.pages = res.data.meta;
         });
     },
+
+    getKeyword(value) {
+      this.search = value;
+      axios
+        .get(URL + "search_product?name=" + this.search, {
+          headers: {
+            Authorization: `${$nuxt.$auth.getToken("local")}`,
+          },
+        })
+        .then((res) => {
+          this.listProduct = res.data.data;
+        });
+    },
   },
-  mounted(){
-      this.fetch();
-  }
+  mounted() {
+    this.fetch();
+  },
 };
 </script>

@@ -8,6 +8,9 @@
               <CForm>
                 <h1>Login</h1>
                 <p class="text-muted">Sign In to your account</p>
+                 <p v-if="Object.keys(err).length > 0" class="text text-danger">
+                  {{ err.fail }}
+                </p>
                 <CInput
                   placeholder="Username"
                   autocomplete="username email"
@@ -17,6 +20,9 @@
                     <CIcon :content="$options.freeSet.cilUser" />
                   </template>
                 </CInput>
+                <p v-if="Object.keys(err).length > 0" class="text text-danger">
+                  {{ err.email }}
+                </p>
                 <CInput
                   placeholder="Password"
                   type="password"
@@ -27,6 +33,9 @@
                     <CIcon :content="$options.freeSet.cilLockLocked" />
                   </template>
                 </CInput>
+                <p v-if="Object.keys(err).length > 0" class="text text-danger">
+                  {{ err.password }}
+                </p>
                 <CRow>
                   <CCol col="6">
                     <CButton color="primary" class="px-4" @click="login">
@@ -54,7 +63,7 @@
               Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
               eiusmod tempor incididunt ut labore et dolore magna aliqua.
             </p>
-            <CButton color="primary" class="active mt-3">
+            <CButton color="primary" class="active mt-3" @click="register">
               Register Now!
             </CButton>
           </CCard>
@@ -75,21 +84,38 @@ export default {
         email: "",
         password: "",
       },
+      err: {},
     };
   },
   methods: {
     /**
-     * login 
+     * login
      */
     async login() {
-      try {
-        await this.$auth.loginWith("local", { data: this.formUser });
-        this.$router.push("/");
-      } catch (err) {
-        this.$notify.error({
-          title: "Error",
-          message: "Sai email hoặc mật khẩu",
-        });
+      this.validate();
+      if (Object.keys(this.err).length > 0) {
+        console.log(this.err);
+        return this.err;
+      } else {
+        try {
+          await this.$auth.loginWith("local", { data: this.formUser });
+          this.$router.push("/");
+        } catch (error) {
+          this.err.fail = 'sai ten tai khoan hoac mat khau';
+        }
+      }
+    },
+
+    register() {
+      this.$router.push("/register");
+    },
+
+    validate() {
+      this.err = {};
+      if (this.formUser.email === "") {
+        this.err.email = "email không được để trống";
+      } else if (this.formUser.password === "") {
+        this.err.password = "mật khẩu không được để trống";
       }
     },
   },

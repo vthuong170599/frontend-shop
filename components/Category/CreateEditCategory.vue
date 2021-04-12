@@ -11,6 +11,9 @@
             placeholder="Enter your name"
             v-model="formCategory.name"
           />
+          <p v-if="Object.keys(error).length > 0" class="text text-danger">
+            {{ error.name }}
+          </p>
         </CCol>
       </CRow>
       <CRow>
@@ -21,6 +24,9 @@
             v-model="formCategory.desc"
           >
           </CTextarea>
+          <p v-if="Object.keys(error).length > 0" class="text text-danger">
+            {{ error.desc }}
+          </p>
         </CCol>
       </CRow>
     </CCardBody>
@@ -45,7 +51,7 @@
 </template>
 <script>
 import axios from "axios";
-import {URL} from '../../constant/constant';
+import { URL } from "../../constant/constant";
 export default {
   data() {
     return {
@@ -53,6 +59,7 @@ export default {
         name: "",
         desc: "",
       },
+      error: {},
     };
   },
   methods: {
@@ -61,7 +68,12 @@ export default {
      * send data to page add
      */
     createCategory() {
-      this.$emit("sendDataCategory", this.formCategory);
+      this.validate();
+      if (Object.keys(this.error).length > 0) {
+        return this.error;
+      } else {
+        this.$emit("createCategory", this.formCategory);
+      }
     },
 
     /**
@@ -69,8 +81,13 @@ export default {
      * send data to page _id
      * @param Integer id
      */
-    updateCategory(id){
-        this.$emit('sendDataById', {id:id,data:this.formCategory});
+    updateCategory(id) {
+      this.validate();
+      if (Object.keys(this.error).length > 0) {
+        return this.error;
+      } else {
+        this.$emit("updateCategory", { id: id, data: this.formCategory });
+      }
     },
 
     /**
@@ -79,7 +96,7 @@ export default {
      */
     getDataCategory(id) {
       axios
-        .get(URL+"category/" + id, {
+        .get(URL + "category/" + id, {
           headers: {
             Authorization: `${$nuxt.$auth.getToken("local")}`,
           },
@@ -87,6 +104,15 @@ export default {
         .then((res) => {
           this.formCategory = res.data.data;
         });
+    },
+
+    validate() {
+      this.error = {};
+      if (this.formCategory.name == "") {
+        this.error.name = "name khong duoc de trong";
+      } else if (this.formCategory.desc == "") {
+        this.error.desc = "desc khong duoc de trong";
+      }
     },
   },
   mounted() {
